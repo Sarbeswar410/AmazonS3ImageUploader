@@ -1,0 +1,48 @@
+<div class="image-upload-container">
+  <div class="image-upload" *ngIf="!flag">
+    <input type="file" id="fileInput" (change)="onFileSelected($event)" />
+    <label for="fileInput" class="upload-label">
+      <div class="upload-icon">
+        <i class="fas fa-cloud-upload-alt"></i>
+      </div>
+      <span>Drag & Drop or Click to Upload</span>
+    </label>
+  </div>
+  <div *ngIf="imageUrl && !flag" class="preview-container">
+    <img [src]="imageUrl" alt="Image Preview" class="image-preview" />
+    <button (click)="removeImage()" class="remove-button">
+      <i class="fas fa-times"></i> Remove
+    </button>
+  </div>
+   <!-- Loader -->
+   <!-- <div *ngIf="isLoading" class="loader">
+    <img src="assets/loading.gif" alt="Loading..."> 
+
+   </div> -->
+  <button *ngIf="imageUrl && !flag" (click)="uploadImage()" class="upload-button">
+    Upload Image
+  </button>
+
+  <div *ngIf="!flag">
+    <button class="btn btn-primary mt-1" type="submit" (click)="fetchAllImages()">GetAll</button>
+  </div>
+  <div *ngIf="imageUrls.length > 0">
+    <div class="row">
+      <div class="col-md-12">
+        <button type="button" class="btn btn-outline-primary btn-sm update-back-button-responsive" (click)="back()"><i
+            class="fa-solid fa-arrow-left" aria-hidden="true">Back</i></button>
+
+      </div>
+
+    </div>
+    <div class="image-container">
+      <div class="ml-auto" style="margin-left: 19rem; color: blue;">
+        <h5 class="ml-auto"><b>Count: {{imageUrls.length}}</b></h5>
+      </div>
+      <div *ngFor="let imageUrl of imageUrls">
+        <img [src]="imageUrl" alt="Image" style="width: 25rem; height: auto;margin-top: 1rem;">
+      </div>
+    </div>
+  </div>
+
+</div>
